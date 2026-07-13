@@ -48,4 +48,36 @@ document.addEventListener('DOMContentLoaded', function () {
       if (status) status.classList.add('show');
     });
   }
+
+  // Auto-calculate experience from the start date
+  var exp = document.getElementById('experience');
+  if (exp && exp.dataset.start) {
+    var start = new Date(exp.dataset.start);
+    var now = new Date();
+
+    var totalMonths = (now.getFullYear() - start.getFullYear()) * 12
+      + (now.getMonth() - start.getMonth());
+    if (now.getDate() < start.getDate()) totalMonths--;
+    if (totalMonths < 0) totalMonths = 0;
+
+    var years = Math.floor(totalMonths / 12);
+    var months = totalMonths % 12;
+
+    var plural = function (n, word) {
+      return n + ' ' + word + (n === 1 ? '' : 's');
+    };
+
+    var text;
+    if (years === 0 && months === 0) {
+      text = 'Just started';
+    } else if (years === 0) {
+      text = plural(months, 'month');
+    } else if (months === 0) {
+      text = plural(years, 'year');
+    } else {
+      text = plural(years, 'year') + ', ' + plural(months, 'month');
+    }
+
+    exp.textContent = text;
+  }
 });
