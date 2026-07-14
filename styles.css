@@ -509,3 +509,19 @@ footer a{color:var(--gold);text-decoration:none;}
   .facts{grid-template-columns:1fr;}
   .avatar-row{flex-direction:column;align-items:flex-start;text-align:left;}
 }
+
+/* ---------- CONTACT FORM: honeypot + status states ---------- */
+
+/* Honeypot — hidden from humans, but NOT with display:none,
+   which some bots detect and skip. */
+.hp{
+  position:absolute;
+  left:-9999px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+.form-status.ok{color:var(--gold);}
+.form-status.error{color:#E08A7A;}
+button[disabled]{opacity:.55;cursor:not-allowed;}
